@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class AdderServlet
- */
 @WebServlet("/AdderServlet")
 public class AdderServlet extends HttpServlet {
 	
@@ -24,11 +21,11 @@ public class AdderServlet extends HttpServlet {
 		String str2=request.getParameter("num2");
 		int num1=Integer.parseInt(str1);
 		int num2=Integer.parseInt(str2);
-		int sum=num1+num2;
+		int sum=num1*num2;
 		out.println("<html>");
-		out.println("<head>덧셈프로그램-결과화면</title></head>");
+		out.println("<head>곱셈프로그램-결과화면</title></head>");
 		out.println("<body>");
-		out.printf("%d+%d=%d",num1,num2,num1+num2);
+		out.printf("%d*%d=%d",num1,num2,sum);
 		out.println("</body>");
 		out.println("</html>");
 	}
