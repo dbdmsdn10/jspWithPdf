@@ -1,0 +1,4 @@
+<context-param>
+ <param-name>DB_NAME</param-name>
+ <param-value>bankdb</param-value>
+ </context-param>
