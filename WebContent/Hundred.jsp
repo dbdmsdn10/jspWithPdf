@@ -4,6 +4,7 @@
 		sum+=i;
 	}
 	request.setAttribute("result", sum);
-	RequestDispatcher dispatcher=request.getRequestDispatcher("HundredResult.jsp");
-	dispatcher.forward(request, response);
+	//RequestDispatcher dispatcher=request.getRequestDispatcher("HundredResult.jsp");
+	//dispatcher.forward(request, response);
 %>
+<jsp:forward page="HundredResult.jsp"/>
