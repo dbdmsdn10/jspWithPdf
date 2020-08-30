@@ -26,6 +26,16 @@
 					<a href="../servletAndroid/bbs.list">게시판 긁읽기</a>
 				</div>
 			</div>
+			<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+			<c:if test="${id==null}">
+				<div class="login"><jsp:include page="/user/login.jsp" /></div>
+			</c:if>
+			<c:if test="${id!=null}">
+				<div class="logout">
+					<div>안녕하세요! ${name}님</div>
+					<button onClick="location.href='/servletAndroid/user.logout'">로그아웃</button>
+				</div>
+			</c:if>
 			<div id="content">
 				<!-- 여기에 출력할 내용 작성 시작 -->
 				<h2>[회사소개]</h2>

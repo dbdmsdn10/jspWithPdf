@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h2>[도서수정]</h2>
-	<form action="update" method="post">
+	<form action="book.update" method="post">
 		<table border=1 width=500>
 			<tr>
 				<td width=100>코드:</td>
@@ -29,8 +29,8 @@
 		</table>
 		<div id="btnMenu">
 			<input type="submit" value="저장"> <input type="button"
-				value="삭제" onClick="location.href='delete?code=${vo.code}'">
-			<input type="button" value="목록" onClick="location.href='list'">
+				value="삭제" onClick="location.href='book.delete?code=${vo.code}'">
+			<input type="button" value="목록" onClick="location.href='book.list'">
 			<input type="reset" value="취소">
 		</div>
 	</form>

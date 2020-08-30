@@ -57,6 +57,6 @@ public class BBSServlet extends HttpServlet {
 			dao.insert(vo);
 			break;
 		}
-		response.sendRedirect("list");
+		response.sendRedirect("bbs.list?page=1");
 	}
 }

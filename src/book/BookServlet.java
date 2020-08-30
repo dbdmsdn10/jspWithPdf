@@ -9,11 +9,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class BookServlet
  */
-@WebServlet(value = { "/book.list", "/book.insert", "/book.delete", "/book.update", "/book.read" })
+@WebServlet(value = { "/book.list", "/book.insert", "/book.delete", "/book.update", "/book.read", "/book/cart" })
 public class BookServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -50,9 +51,13 @@ public class BookServlet extends HttpServlet {
 		case "/book.delete":
 			code = request.getParameter("code");
 			dao.delete(code);
-			response.sendRedirect("list");
+			response.sendRedirect("book.list");
 			break;
-			
+		case "/book/cart":
+			 dis=request.getRequestDispatcher("listCart.jsp");
+			 dis.forward(request, response);
+			 break;
+
 		}
 	}
 
@@ -63,17 +68,54 @@ public class BookServlet extends HttpServlet {
 		BookVO vo = new BookVO();
 		switch (request.getServletPath()) {
 		case "/book.insert":
+			vo.setCode(request.getParameter("code"));
+			vo.setTitle(request.getParameter("title"));
+			vo.setWriter(request.getParameter("writer"));
+			String price = request.getParameter("price");
+			vo.setPrice(price);
 			dao.insert(vo);
 			break;
 		case "/book.update":
 			vo.setCode(request.getParameter("code"));
 			vo.setTitle(request.getParameter("title"));
 			vo.setWriter(request.getParameter("writer"));
-			String price = request.getParameter("price");
+			price = request.getParameter("price");
 			vo.setPrice(price);
 			dao.update(vo);
 			break;
+		case "/book/cart":
+			 String code=request.getParameter("code");
+			 vo=dao.read(code);
+			 CartVO cartVO=new CartVO();
+			 cartVO.setCode(vo.getCode());
+			 cartVO.setTitle(vo.getTitle());
+			 cartVO.setPrice(vo.getPrice());
+			 cartVO.setWriter(vo.getWriter());
+			 cartVO.setNumber(1);
+			 HttpSession session=request.getSession();
+			 ArrayList<CartVO> listCart=(ArrayList<CartVO>)session.getAttribute("listCart");
+			 //세션에 listCart가 존재하는 경우
+			 if(listCart!=null) {
+			 boolean find=false;
+			 for(CartVO cart:listCart) {
+			 //listCart에서 code값이 일치하는 경우 수량을 1증가
+			 if(cart.getCode().equals(code)) {
+			 cart.setNumber(cart.getNumber() + 1);
+			find=true;
+			 }
+			 }
+			 //listCart에 code값이 없는 경우
+			 if(find==false) {
+			 listCart.add(cartVO);
+			 }
+			 //세션에 listCart가 존재하지 않는 경우
+			 }else {
+			 listCart=new ArrayList<CartVO>();
+			 listCart.add(cartVO);
+			 }
+			 session.setAttribute("listCart", listCart);
+			 break;
 		}
-		response.sendRedirect("list");
+		response.sendRedirect("book.list");
 	}
 }

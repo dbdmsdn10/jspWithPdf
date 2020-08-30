@@ -8,7 +8,7 @@
 </head>
 <body>
 	<h2>[도서등록]</h2>
-	<form action="insert" method="post">
+	<form action="../servletAndroid/book.insert" method="post">
 		<table border=1 width=500>
 			<tr>
 				<td width=100>코드:</td>
