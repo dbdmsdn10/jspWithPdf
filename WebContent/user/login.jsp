@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
 <%--<form name="frm" style="margin: 0px;">--%>
-<form action="../user.login" method="post">
+<form action="/servletAndroid/user.login" method="post">
 	<div>
 		아 이 디 : <input type="text" name="id" size=10>
 	</div>
